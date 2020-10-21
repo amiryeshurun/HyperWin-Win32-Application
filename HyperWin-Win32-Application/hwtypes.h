@@ -4,6 +4,8 @@
 #include <Windows.h>
 #include "x86_64.h"
 
+#define HWSTATUS DWORD64
+
 typedef UINT64 OPERATION, * POPERATION;
 
 typedef struct _GENERIC_COM_STRUCT

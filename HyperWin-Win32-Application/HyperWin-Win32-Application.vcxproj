@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="comops.h" />
     <ClInclude Include="hwops.h" />
     <ClInclude Include="hwstatus.h" />
     <ClInclude Include="hwtypes.h" />
@@ -146,6 +147,7 @@
     <ClInclude Include="x86_64.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="comops.c" />
     <ClCompile Include="utils.c" />
     <ClCompile Include="w32main.c" />
   </ItemGroup>

@@ -30,12 +30,18 @@
     <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="comops.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="w32main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="utils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="comops.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
