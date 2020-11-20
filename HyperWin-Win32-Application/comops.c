@@ -20,3 +20,8 @@ HWSTATUS SendInitSignal(IN HANDLE Handle, IN PGENERIC_COM_STRUCT Args)
 	hvPrint("Operation complete\n");
 	return HYPERWIN_STATUS_SUCCUESS;
 }
+
+HWSTATUS MarkProcessProtected(IN HANDLE Handle, IN PGENERIC_COM_STRUCT Args)
+{
+
+}
