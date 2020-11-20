@@ -4,5 +4,6 @@
 #include "hwtypes.h"
 
 HWSTATUS SendInitSignal(IN HANDLE Handle, IN PGENERIC_COM_STRUCT Args);
+HWSTATUS MarkProcessProtected(IN HANDLE Handle, IN PGENERIC_COM_STRUCT Args);
 
 #endif

@@ -23,5 +23,14 @@ HWSTATUS SendInitSignal(IN HANDLE Handle, IN PGENERIC_COM_STRUCT Args)
 
 HWSTATUS MarkProcessProtected(IN HANDLE Handle, IN PGENERIC_COM_STRUCT Args)
 {
-
+	Args->Operation = OPERATION_PROTECTED_PROCESS;
+	INT Dummy;
+	hvPrint("Sending args\n");
+	if (!DeviceIoControl(Handle, CTL_CODE_HW, Args, sizeof(*Args), NULL, 0, &Dummy, NULL))
+	{
+		hvPrint("DeviceIoControl failed: %d\n", GetLastError());
+		return HYPERWIN_IOCTL_FAILED;
+	}
+	hvPrint("Successfully sent a request to mark process as protected\n");
+	return HYPERWIN_STATUS_SUCCUESS;
 }

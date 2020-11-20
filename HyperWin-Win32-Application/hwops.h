@@ -8,6 +8,7 @@
 
 /* Communication block different operations */
 
-#define OPERATION_INIT 0x4857494e4954 // HWINIT ASCII
+#define OPERATION_INIT				0x4857494e4954 // HWINIT ASCII
+#define OPERATION_PROTECTED_PROCESS 0x70726f74656374  // PROTECT ASCII
 
 #endif
