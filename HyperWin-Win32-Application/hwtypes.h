@@ -19,7 +19,15 @@ typedef struct _GENERIC_COM_STRUCT
             DWORD64 MessageLength;
             BYTE Message[PAGE_SIZE];
         } InitArgs;
+        struct _PROTECT_PROCESS
+        {
+            HANDLE Handle;
+        } protectProcess;
     } ArgumentsUnion;
 } GENERIC_COM_STRUCT, * PGENERIC_COM_STRUCT;
 
+typedef struct _APPLICATION_DATA
+{
+    HWND ProcessNameTextbox;
+} APPLICATION_DATA, *PAPPLICATION_DATA;
 #endif

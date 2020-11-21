@@ -8,9 +8,11 @@
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+APPLICATION_DATA appData;
+
 INT WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, INT nCmdShow)
 {
-    WCHAR ClassName = L"HypwerWin Windows Class";
+    WCHAR ClassName = L"HypwerWin Window Class";
     WNDCLASS WindowClass;
     memset(&WindowClass, 0, sizeof(WNDCLASS));
     WindowClass.lpfnWndProc = WindowProc;
@@ -23,7 +25,7 @@ INT WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         0,
         ClassName,
         L"HyperWin Controller",
-        WS_OVERLAPPEDWINDOW,
+        WS_OVERLAPPEDWINDOW | WS_VISIBLE,
         CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
         NULL,       // Parent window    
         NULL,       // Menu
@@ -35,7 +37,7 @@ INT WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         return HYPERWIN_CREATE_WINDOW_FAILED;
     }
     ShowWindow(hwnd, nCmdShow);
-
+    /*
     HANDLE Handle = CreateFileA("\\\\.\\HyperWin", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (Handle == INVALID_HANDLE_VALUE)
@@ -46,7 +48,7 @@ INT WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     GENERIC_COM_STRUCT Request;
     if (MarkProcessProtected(Handle, &Request) != HYPERWIN_STATUS_SUCCUESS)
         return HYPERWIN_INIT_FAILED;
-
+    */
     MSG msg;
     while (GetMessage(&msg, NULL, 0, 0))
     {
@@ -54,10 +56,35 @@ INT WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         DispatchMessage(&msg);
     }
 
-    return 0;
+    exit(0);
 }
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+    switch (uMsg)
+    {
+        case WM_CREATE:
+        {
+            if ((hwnd = CreateWindowEx(WS_EX_APPWINDOW,
+                L"Edit",
+                L"", // An empty textbox
+                WS_BORDER | WS_CHILD | WS_VISIBLE, 
+                20, 20, 310, 20, 
+                hwnd, 
+                NULL, 
+                NULL, 
+                NULL)) == NULL)
+            {
+                hvPrint("Could not create a textbox to store process name: %d\n", GetLastError());
+                return HYPERWIN_CREATE_WINDOW_FAILED;
+            }
+            break;
+        }
+        case WM_QUIT:
+        {
+            PostQuitMessage(0);
+            break;
+        }
+    }
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
